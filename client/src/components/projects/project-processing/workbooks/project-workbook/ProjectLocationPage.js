@@ -5,7 +5,6 @@ import {Page, StyleSheet, Text} from '@react-pdf/renderer';
 import ReportHeader from '../../../../reports/components/ReportHeader';
 import DataColumn from '../../../../reports/components/DataColumn';
 import {DateTime} from 'luxon';
-import PageContent from '../../../../reports/components/PageContent';
 import PageTitle from '../../../../reports/components/PageTitle';
 import {formatNumberTwoDecimals} from '../../../../../functions/formattingFunctions';
 import DataTable from '../../../../reports/components/TableComponents';
@@ -59,12 +58,10 @@ const ProjectLocationPage = ({projectData}) => {
 					}
 				/>
 			</ReportHeader>
-			<PageContent>
 				<PageTitle title='LOCATION SUMMARY INFO'/>
 				<DataColumn key={item.id} data={item.locationData}/>
 				<PageTitle title='LOCATION DETAIL INFO'/>
 				<DataTable data={item.itemData}/>
-			</PageContent>
 		</Page>
 	));
 };
