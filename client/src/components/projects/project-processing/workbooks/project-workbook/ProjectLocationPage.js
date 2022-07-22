@@ -8,10 +8,12 @@ import {DateTime} from 'luxon';
 import PageTitle from '../../../../reports/components/PageTitle';
 import {formatNumberTwoDecimals} from '../../../../../functions/formattingFunctions';
 import DataTable from '../../../../reports/components/TableComponents';
+import SignatureBar from "../../../../reports/components/SignatureBar";
 
 const styles = StyleSheet.create({
 	container: {
 		display: 'flex',
+		padding: 10
 	},
 });
 
@@ -36,11 +38,10 @@ const ProjectLocationPage = ({projectData}) => {
 				activityDescription: item.activityDescription,
 				activityCode: item.activityCode,
 				qtyOrdered: formatNumberTwoDecimals(item.qtyOrdered),
-				locationValue: formatNumberTwoDecimals(item.valuePayableTotal),
+				//	locationValue: formatNumberTwoDecimals(item.valuePayableTotal),
 				qtyOs: formatNumberTwoDecimals(item.qtyOs),
 				qtyComplete: '',
 				comments: '',
-
 			}))
 		};
 	});
@@ -50,7 +51,6 @@ const ProjectLocationPage = ({projectData}) => {
 		<Page size={'a4'} orientation={'landscape'} style={styles.container} key={item.id}>
 			<ReportHeader>
 				<Text>Printed: {today.toLocaleString()}</Text>
-
 				<Text>{'Project Workbook Report'}</Text>
 				<Text
 					render={({pageNumber, totalPages}) =>
@@ -58,10 +58,11 @@ const ProjectLocationPage = ({projectData}) => {
 					}
 				/>
 			</ReportHeader>
-				<PageTitle title='LOCATION SUMMARY INFO'/>
-				<DataColumn key={item.id} data={item.locationData}/>
-				<PageTitle title='LOCATION DETAIL INFO'/>
-				<DataTable data={item.itemData}/>
+			<PageTitle title='LOCATION SUMMARY INFO'/>
+			<DataColumn key={item.id} data={item.locationData}/>
+			<PageTitle title='BILL ITEM DETAIL'/>
+			<DataTable data={item.itemData}/>
+			<SignatureBar/>
 		</Page>
 	));
 };

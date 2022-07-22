@@ -10,9 +10,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         textDecoration: 'underline',
         fontSize: 12,
-        padding: 5,
+        padding: 10,
         fontFamily: 'Lato Bold',
-        margin: 2.5,
     },
 });
 

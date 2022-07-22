@@ -11,23 +11,23 @@ import PageContent from '../../../../reports/components/PageContent';
 const today = DateTime.now().toLocaleString();
 
 const ProjectHeaderPage = ({projectData}) => {
-	return (
-		<Page size={'a4'} orientation={'landscape'}>
-			<ReportHeader>
-				<Text>Printed: {today.toLocaleString()}</Text>
-				<Text>{'Project Workbook Report'}</Text>
-				<Text
-					render={({pageNumber, totalPages}) =>
-						`Page:${pageNumber} / ${totalPages}`
-					}
-				/>
-			</ReportHeader>
-			<PageContent>
-				<PageTitle title='PROJECT SUMMARY INFO'/>
-				<ProjectSummarySection projectData={projectData}/>
-			</PageContent>
-		</Page>
-	);
+    return (
+        <Page size={'a4'} orientation={'landscape'} style={{padding: 10}}>
+            <ReportHeader>
+                <Text>Printed: {today.toLocaleString()}</Text>
+                <Text>{'Project Workbook Report'}</Text>
+                <Text
+                    render={({pageNumber, totalPages}) =>
+                        `Page:${pageNumber} / ${totalPages}`
+                    }
+                />
+            </ReportHeader>
+            <PageContent>
+                <PageTitle title='PROJECT SUMMARY INFO'/>
+                <ProjectSummarySection projectData={projectData}/>
+            </PageContent>
+        </Page>
+    );
 };
 
 export default ProjectHeaderPage;

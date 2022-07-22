@@ -58,7 +58,7 @@ const ProjectProcessingButtons = () => {
 					color='navigation'
 					onClick={() => navigate('workbooks')}
 					disabled={location.pathname === '/projects/processing/workbooks'}>
-					project workbooks
+					reports
 				</Button>{' '}
 			</Grid>
 		</Grid>

@@ -10,7 +10,7 @@ import ProjectLocationPage from './ProjectLocationPage';
 
 const ProjectWorkbookReport = ({projectData}) => {
 	return (
-		<Document>
+		<Document pageMode={'useOutlines'}>
 			<ProjectHeaderPage projectData={projectData}/>
 			<ProjectLocationPage projectData={projectData}/>
 		</Document>
@@ -22,6 +22,7 @@ const ProjectWorkbook = () => {
 	const [projectData, setProjectData] = React.useState();
 	const {loading} = useQuery(GET_PROJECT_WORKBOOK_DETAILS, {
 		variables: {orderId: Number(id)},
+		fetchPolicy: 'cache-and-network',
 		onCompleted: (data) => setProjectData(data.orderheader),
 	});
 

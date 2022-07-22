@@ -6,8 +6,9 @@ import React from 'react';
 const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
-        margin: 2.5,
-        padding: 3,
+
+        marginBottom: 5,
+        paddingBottom: 2.5,
         justifyContent: 'space-between',
         fontSize: 6,
         borderBottom: 1,
