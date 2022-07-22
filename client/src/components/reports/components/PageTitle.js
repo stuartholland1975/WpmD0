@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
 		textTransform: 'uppercase',
 		justifyContent: 'center',
 		textDecoration: 'underline',
-		fontSize: 15,
-		marginTop: 5,
+		fontSize: 12,
+		padding: 5,
 		fontFamily: 'Lato Bold',
 	},
 });

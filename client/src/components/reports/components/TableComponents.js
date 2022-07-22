@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		backgroundColor: '#e6e6e6',
 		fontSize: 8,
-		padding: 2,
+		padding: 5,
 	},
 
 	tableCell: {
@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
 		borderStyle: BORDER_STYLE,
 		borderColor: BORDER_COLOR,
 		borderWidth: 1,
-		padding: 2,
+		padding: 5,
+		paddingBottom: 10,
+		paddingTop: 10,
 		flexGrow: 1,
 	},
 

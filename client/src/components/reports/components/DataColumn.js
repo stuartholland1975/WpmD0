@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
 	container: {
 		borderStyle: 'solid',
 		borderWidth: 1,
-		margin: 10,
+		marginLeft: 10,
+		marginRight: 10,
 		padding: 10,
 		backgroundColor: '#f2f2f2',
 	},
