@@ -10,13 +10,13 @@ const DocumentAdminButtons = () => {
                 <UploadGlobalDocument />
             </Grid>
             <Grid item xs={3}>
-                <Button>button</Button>
+                <Button disabled>button</Button>
             </Grid>
             <Grid item xs={3}>
                 <DeleteGlobalDocuments />
             </Grid>
             <Grid item xs={3}>
-                <Button>button</Button>
+                <Button disabled>button</Button>
             </Grid>
         </Grid>
     );

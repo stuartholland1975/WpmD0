@@ -1,6 +1,6 @@
 import React from 'react';
-import {useModal} from 'react-modal-hook';
-import {Box, Button, Dialog, DialogTitle, Divider, IconButton,} from '@mui/material';
+import { useModal } from 'react-modal-hook';
+import { Box, Button, Dialog, DialogTitle, Divider, IconButton, } from '@mui/material';
 import CloseIcon from "@mui/icons-material/Close";
 import UploadIcon from '@mui/icons-material/Upload'
 import UploadGlobalDocumentForm from "../../forms/documents/UploadGlobalDocumentForm";
@@ -26,18 +26,18 @@ const UploadGlobalDocument = () => {
                         justifyContent='space-between'>
                         <Box
                             flexGrow={1}
-                            sx={{textTransform: 'uppercase', fontWeight: 'bold'}}>
+                            sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
                             UPLOAD GLOBAL DOCUMENT
                         </Box>
                         <Box>
                             <IconButton onClick={hideModal}>
-                                <CloseIcon/>
+                                <CloseIcon />
                             </IconButton>
                         </Box>
                     </Box>
                 </DialogTitle>
-                <Divider/>
-                <UploadGlobalDocumentForm hideModal={hideModal}/>
+                <Divider />
+                <UploadGlobalDocumentForm hideModal={hideModal} />
             </Dialog>
         ),
         [],
@@ -46,9 +46,9 @@ const UploadGlobalDocument = () => {
         <Button
             onClick={showModal}
             color='create'
-            startIcon={<UploadIcon/>}
+            startIcon={<UploadIcon />}
         >
-            upload global document
+            upload global document(s)
         </Button>
     );
 };

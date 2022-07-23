@@ -45,7 +45,7 @@ const DeleteGlobalDocuments = () => {
             color='delete'
             disabled={selectedDocuments === false}
             startIcon={<DeleteIcon />}>
-            delete global document(s)
+            delete document(s)
         </Button>
     );
 };
