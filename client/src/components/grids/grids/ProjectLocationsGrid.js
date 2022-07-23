@@ -1,39 +1,39 @@
 /** @format */
 
-import {useQuery} from '@apollo/client';
-import {CircularProgress} from '@mui/material';
-import {AgGridReact} from 'ag-grid-react';
+import { useQuery } from '@apollo/client';
+import { CircularProgress } from '@mui/material';
+import { AgGridReact } from 'ag-grid-react';
 import React from 'react';
-import {GET_PROJECT_LOCATIONS} from '../../../api-calls/queries/locations';
-import {gridSelectionsVar} from '../../../cache';
-import {formatNumberGridTwoDecimals} from '../../../functions/formattingFunctions';
+import { GET_PROJECT_LOCATIONS } from '../../../api-calls/queries/locations';
+import { gridSelectionsVar } from '../../../cache';
+import { formatNumberGridTwoDecimals } from '../../../functions/formattingFunctions';
 import GridQtyFilter from '../components/GridQtyFilter';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const ProjectLocationsGrid = () => {
-	const {id} = useParams();
+	const { id } = useParams();
 	const [value, setValue] = React.useState('All');
 	const gridRef = React.useRef();
 	const [rowData, setRowData] = React.useState();
-	const {loading} = useQuery(GET_PROJECT_LOCATIONS, {
-		variables: {id: Number(id)},
+	const { loading } = useQuery(GET_PROJECT_LOCATIONS, {
+		variables: { id: Number(id) },
 		fetchPolicy: 'cache-and-network',
 		onCompleted: (data) => setRowData(data.sitelocationWithValues.nodes),
 	});
 	const columnDefs = React.useMemo(
 		() => [
-			{field: 'id', hide: true, sort: 'asc'},
+			{ field: 'id', hide: true, sort: 'asc' },
 			{
 				headerName: 'Worksheet Ref',
 				field: 'worksheetReference',
-				cellStyle: {textAlign: 'left'},
+				cellStyle: { textAlign: 'left' },
 				// checkboxSelection: (params) => !params.data.complete,
 				checkboxSelection: true,
 			},
 			{
 				headerName: 'Location',
 				field: 'reference',
-				cellStyle: {textAlign: 'left'},
+				cellStyle: { textAlign: 'left' },
 				flex: 2,
 			},
 			{
@@ -138,15 +138,12 @@ const ProjectLocationsGrid = () => {
 	const onSelectionChanged = React.useCallback(() => {
 		const selectedRow = gridRef.current.api.getSelectedRows();
 		selectedRow.length === 0
-			? gridSelectionsVar({...gridSelectionsVar(), selectedLocation: false})
+			? gridSelectionsVar({ ...gridSelectionsVar(), selectedLocation: false })
 			: gridSelectionsVar({
 				...gridSelectionsVar(),
 				selectedLocation: selectedRow,
 			});
 	}, []);
-	/*const isRowSelectable = React.useCallback((rowNode) => {
-		return rowNode.data ? !rowNode.data.complete : false;
-	}, []);*/
 
 	React.useEffect(() => {
 		if (typeof gridRef.current !== 'undefined' && gridRef.current.api) {
@@ -172,7 +169,7 @@ const ProjectLocationsGrid = () => {
 		[value],
 	);
 
-	if (loading) return <CircularProgress/>;
+	if (loading) return <CircularProgress />;
 	return (
 		<>
 			<AgGridReact
@@ -188,13 +185,12 @@ const ProjectLocationsGrid = () => {
 				pagination={true}
 				paginationPageSize={20}
 				onSelectionChanged={onSelectionChanged}
-				// isRowSelectable={isRowSelectable}
 				suppressCellFocus={true}
 				isExternalFilterPresent={isExternalFilterPresent}
 				doesExternalFilterPass={doesExternalFilterPass}
 				suppressRowClickSelection={true}
 			/>
-			<GridQtyFilter value={value} setValue={setValue}/>
+			<GridQtyFilter value={value} setValue={setValue} />
 		</>
 	);
 };

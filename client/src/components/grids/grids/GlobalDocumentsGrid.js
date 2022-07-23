@@ -4,9 +4,11 @@ import { useQuery } from '@apollo/client';
 import { GET_GLOBAL_DOCUMENTS } from "../../../api-calls/queries/misc";
 import { formatDate } from "../../../functions/formattingFunctions";
 import HyperLink from "../components/Hyperlink";
+import { gridSelectionsVar } from '../../../cache';
 
 const GlobalDocumentsGrid = () => {
     const [rowData, setRowData] = React.useState();
+    const gridRef = React.useRef();
 
     const { loading } = useQuery(GET_GLOBAL_DOCUMENTS, {
         onCompleted: data => setRowData(data.documents.nodes)
@@ -40,6 +42,16 @@ const GlobalDocumentsGrid = () => {
         [],
     );
 
+    const onSelectionChanged = React.useCallback(() => {
+        const selectedRow = gridRef.current.api.getSelectedRows();
+        selectedRow.length === 0
+            ? gridSelectionsVar({ ...gridSelectionsVar(), selectedDocument: false })
+            : gridSelectionsVar({
+                ...gridSelectionsVar(),
+                selectedDocument: selectedRow,
+            });
+    }, []);
+
     if (loading) return null
     return (
         <AgGridReact
@@ -52,6 +64,9 @@ const GlobalDocumentsGrid = () => {
             pagination={true}
             paginationPageSize={20}
             suppressRowClickSelection={true}
+            onSelectionChanged={onSelectionChanged}
+            ref={gridRef}
+            rowSelection='multiple'
         />
     );
 };

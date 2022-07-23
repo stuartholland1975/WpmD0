@@ -1,6 +1,6 @@
 /** @format */
 
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const CREATE_PROJECT_HEADER = gql`
     mutation CreateProjectHeader($input: OrderheaderInput!) {
@@ -527,6 +527,15 @@ mutation UploadDocuments($input: [DocumentInput!]) {
     input: { mnDocument: $input }
   ) {
     clientMutationId
+  }
+}
+`
+export const DELETE_GLOBAL_DOCUMENTS = gql`
+mutation DeleteGlobalDocuments($input: [DocumentPatch!]) {
+  mnDeleteDocument(input: { mnPatch: $input }) {
+    document {
+      id
+    }
   }
 }
 `
