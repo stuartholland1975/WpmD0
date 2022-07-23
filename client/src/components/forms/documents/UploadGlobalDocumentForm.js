@@ -1,16 +1,17 @@
 import React from 'react';
-import {useFieldArray, useForm} from 'react-hook-form';
-import {Button, DialogActions, DialogContent, Divider, Grid, TextField,} from '@mui/material';
-import {useConfirm} from 'material-ui-confirm';
+import { useFieldArray, useForm } from 'react-hook-form';
+import { Button, DialogActions, DialogContent, Divider, Grid, TextField, } from '@mui/material';
+import { useConfirm } from 'material-ui-confirm';
 import AddIcon from "@mui/icons-material/Add";
-import {useMutation} from "@apollo/client";
-import {UPLOAD_DOCUMENTS} from "../../../api-calls/mutations/project-mutations";
+import { useMutation } from "@apollo/client";
+import { UPLOAD_DOCUMENTS } from "../../../api-calls/mutations/project-mutations";
+import { GET_GLOBAL_DOCUMENTS } from '../../../api-calls/queries/misc';
 
-const UploadGlobalDocumentForm = ({hideModal}) => {
+const UploadGlobalDocumentForm = ({ hideModal }) => {
 
     const confirm = useConfirm();
 
-    const {register, handleSubmit, control, reset, setFocus, getValues} =
+    const { register, handleSubmit, control, reset, setFocus, getValues } =
         useForm({
             defaultValues: {
                 document: [
@@ -22,26 +23,43 @@ const UploadGlobalDocumentForm = ({hideModal}) => {
             },
         });
 
-    const {fields, append, remove} = useFieldArray({
+    const { fields, append, remove } = useFieldArray({
         control,
         name: 'document',
     });
 
-    const [uploadDocuments] = useMutation(UPLOAD_DOCUMENTS)
+    const [uploadDocuments] = useMutation(UPLOAD_DOCUMENTS, {
+        refetchQueries: [
+            { query: GET_GLOBAL_DOCUMENTS },
+        ],
+        awaitRefetchQueries: true,
+        onCompleted: () => hideModal()
+    })
+
+    const prepareApiData = data => {
+        return data.map(item => ({
+            title: item.title,
+            global: true,
+            headerDocumentFile: item.headerDocumentFile[0]
+        }))
+    }
 
     const onSubmit = data => {
-        console.log(data)
-        const {document} = data
+
+        const { document } = data
+        console.log(data, document)
 
         confirm({
             title: 'Confirm Data Submission',
-            titleProps: {color: 'red', fontWeight: 'bold'},
+            titleProps: { color: 'red', fontWeight: 'bold' },
             content: `Submission Contains ${document.length} Item(s)`,
             confirmationText: 'Confirm',
-            cancellationButtonProps: {color: 'secondary'},
+            cancellationButtonProps: { color: 'secondary' },
             allowClose: false,
-            contentProps: {fontWeight: 'bold'},
-        }).then(r => console.log(r))
+            contentProps: { fontWeight: 'bold' },
+        }).then(() => prepareApiData(document)).then(r => uploadDocuments({
+            variables: { input: r }
+        }))
     }
 
     React.useEffect(() => {
@@ -68,9 +86,9 @@ const UploadGlobalDocumentForm = ({hideModal}) => {
                                         variant='filled'
                                         accept='pdf/*'
                                         type='file'
-                                        sx={{height: '100%'}}
+                                        sx={{ height: '100%' }}
                                         {...register(`document.${index}.headerDocumentFile`)}
-                                        // onChange={(data) => prepareImagePreview(data, index)}
+                                    // onChange={(data) => prepareImagePreview(data, index)}
                                     />
                                 </Grid>
                                 <Grid item xs={1}>
@@ -78,7 +96,7 @@ const UploadGlobalDocumentForm = ({hideModal}) => {
                                         fullWidth
                                         color='delete'
                                         onClick={() => remove(index)}
-                                        sx={{borderRadius: 0, border: 1, height: '100%'}}>
+                                        sx={{ borderRadius: 0, border: 1, height: '100%' }}>
                                         remove
                                     </Button>
                                 </Grid>
@@ -87,7 +105,7 @@ const UploadGlobalDocumentForm = ({hideModal}) => {
                     </Grid>
                 </form>
             </DialogContent>
-            <Divider/>
+            <Divider />
             <DialogActions>
                 <Grid container p={2} spacing={2} columns={4}>
                     <Grid item xs={1}>
@@ -95,7 +113,7 @@ const UploadGlobalDocumentForm = ({hideModal}) => {
                             fullWidth
                             onClick={hideModal}
                             color='secondary'
-                            sx={{borderRadius: 0, border: 1, height: '100%'}}>
+                            sx={{ borderRadius: 0, border: 1, height: '100%' }}>
                             close
                         </Button>
                     </Grid>
@@ -104,7 +122,7 @@ const UploadGlobalDocumentForm = ({hideModal}) => {
                             fullWidth
                             color='info'
                             onClick={() => reset()}
-                            sx={{borderRadius: 0, border: 1, height: '100%'}}>
+                            sx={{ borderRadius: 0, border: 1, height: '100%' }}>
                             reset
                         </Button>
                     </Grid>
@@ -112,10 +130,10 @@ const UploadGlobalDocumentForm = ({hideModal}) => {
                         <Button
                             // ref={addImageButtonRef}
                             // disabled={disabled}
-                            sx={{height: '100%', borderRadius: 0, border: 1}}
+                            sx={{ height: '100%', borderRadius: 0, border: 1 }}
                             color='create'
                             fullWidth
-                            startIcon={<AddIcon/>}
+                            startIcon={<AddIcon />}
                             onClick={() => append(undefined, undefined)}>
                             add another
                         </Button>
@@ -126,7 +144,7 @@ const UploadGlobalDocumentForm = ({hideModal}) => {
                             fullWidth
                             color='submit'
                             onClick={handleSubmit(onSubmit)}
-                            sx={{borderRadius: 0, border: 1, height: '100%'}}>
+                            sx={{ borderRadius: 0, border: 1, height: '100%' }}>
                             submit
                         </Button>
                     </Grid>
