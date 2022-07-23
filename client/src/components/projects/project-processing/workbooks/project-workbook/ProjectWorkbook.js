@@ -9,29 +9,29 @@ import {GET_PROJECT_WORKBOOK_DETAILS} from '../../../../../api-calls/queries/mis
 import ProjectLocationPage from './ProjectLocationPage';
 
 const ProjectWorkbookReport = ({projectData}) => {
-	return (
-		<Document pageMode={'useOutlines'}>
-			<ProjectHeaderPage projectData={projectData}/>
-			<ProjectLocationPage projectData={projectData}/>
-		</Document>
-	);
+    return (
+        <Document>
+            <ProjectHeaderPage projectData={projectData}/>
+            <ProjectLocationPage projectData={projectData}/>
+        </Document>
+    );
 };
 
 const ProjectWorkbook = () => {
-	const {id} = useParams();
-	const [projectData, setProjectData] = React.useState();
-	const {loading} = useQuery(GET_PROJECT_WORKBOOK_DETAILS, {
-		variables: {orderId: Number(id)},
-		fetchPolicy: 'cache-and-network',
-		onCompleted: (data) => setProjectData(data.orderheader),
-	});
+    const {id} = useParams();
+    const [projectData, setProjectData] = React.useState();
+    const {loading} = useQuery(GET_PROJECT_WORKBOOK_DETAILS, {
+        variables: {orderId: Number(id)},
+        fetchPolicy: 'cache-and-network',
+        onCompleted: (data) => setProjectData(data.orderheader),
+    });
 
-	if (loading) return null;
-	return (
-		<PDFViewer width={'100%'} height={1000}>
-			<ProjectWorkbookReport projectData={projectData}/>
-		</PDFViewer>
-	);
+    if (loading) return null;
+    return (
+        <PDFViewer width={'100%'} height={1000}>
+            <ProjectWorkbookReport projectData={projectData}/>
+        </PDFViewer>
+    );
 };
 
 export default ProjectWorkbook;

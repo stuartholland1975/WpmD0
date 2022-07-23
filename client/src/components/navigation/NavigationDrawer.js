@@ -73,7 +73,7 @@ const adminItems = {
 		{
 			text: 'DOCUMENTS',
 			icon: <AppsIcon color='contrasting' fontSize='medium'/>,
-			path: '/',
+			path: '/admin/documents',
 		},
 	],
 };
