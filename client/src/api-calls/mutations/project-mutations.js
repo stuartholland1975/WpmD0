@@ -520,3 +520,13 @@ export const ADD_BULK_IMAGES_TO_LOCATION = gql`
     }
 
 `
+
+export const UPLOAD_DOCUMENTS = gql`
+mutation UploadDocuments($input: [DocumentInput!]) {
+  mnCreateDocument(
+    input: { mnDocument: $input }
+  ) {
+    clientMutationId
+  }
+}
+`

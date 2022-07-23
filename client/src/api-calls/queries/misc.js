@@ -256,3 +256,26 @@ export const GET_PROJECT_WORKBOOK_DETAILS = gql`
         }
     }
 `
+
+export const GET_GLOBAL_DOCUMENTS = gql`
+query GetGlobalDocuments {
+  documents(filter: { global: { equalTo: true } }) {
+    nodes {
+      id
+      title
+      createdAt
+      global
+      headerDocumentFile
+      orderheaderDocuments {
+        nodes {
+          orderheader {
+            id
+            orderNumber
+            projectTitle
+          }
+        }
+      }
+    }
+  }
+}
+`

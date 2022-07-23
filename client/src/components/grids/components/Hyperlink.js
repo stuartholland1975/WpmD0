@@ -2,8 +2,6 @@ import {Link} from "@mui/material";
 
 const Hyperlink = props => {
     const {data} = props
-    console.log(data)
-
     return (
         <Link
             href={`${process.env.REACT_APP_API_ENDPOINT}/documents/${data["headerDocumentFile"].id}`}

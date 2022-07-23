@@ -52,7 +52,7 @@ const PageTitle = () => {
     } else if (routeMatch.pathname === '/admin/projects') {
         text = 'PROJECT ADMINISTRATION';
     } else if (routeMatch.pathname === '/admin/documents') {
-        text = 'DOCUMENT ADMINISTRATION';
+        text = 'GLOBAL DOCUMENT ADMINISTRATION';
     } else {
         text = 'WORK PACKAGE MANAGER';
     }

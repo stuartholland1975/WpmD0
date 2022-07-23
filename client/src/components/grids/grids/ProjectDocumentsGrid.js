@@ -28,7 +28,6 @@ const ProjectDocumentsGrid = () => {
 				filter: 'agDateColumnFilter',
 				valueFormatter: (params) => formatDate(params.value),
 			},
-
 			{
 				colId: 'hyperLink',
 				headerName: 'Open Document',
