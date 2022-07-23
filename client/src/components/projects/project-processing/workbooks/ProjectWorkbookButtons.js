@@ -9,25 +9,25 @@ const ProjectWorkbookButtons = () => {
             <Grid item xs={1}>
                 <Button
                     onClick={() => navigate('project-workbook')}
-                    color='action'>
+                    color='info'>
                     print project workbook
                 </Button>
             </Grid>
             <Grid item xs={1}>
                 <Button
-                    color='action'>
+                    color='info'>
                     button
                 </Button>
             </Grid>
             <Grid item xs={1}>
                 <Button
-                    color='action'>
+                    color='info'>
                     button
                 </Button>
             </Grid>
             <Grid item xs={1}>
                 <Button
-                    color='action'>
+                    color='info'>
                     button
                 </Button>
             </Grid>

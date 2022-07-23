@@ -16,7 +16,7 @@ export const theme = createTheme({
 		},
 		action: {
 			main: '#45152d',
-			light: '#862d59',
+			// light: '#862d59',
 			contrastText: '#fff',
 		},
 		create: {
@@ -43,8 +43,10 @@ export const theme = createTheme({
 		},
 		cancel: {
 			main: '#404040',
-
-			contrastText: '#fff',
+			contrastText: '#404040',
+		},
+		info: {
+			main: '#404040',
 		},
 		contrasting: {
 			main: '#fff',

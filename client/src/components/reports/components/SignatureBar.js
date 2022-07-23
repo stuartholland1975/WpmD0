@@ -44,8 +44,9 @@ const SignatureBar = () => {
             <View style={{flexDirection: "row"}}>
                 <Text style={styles.tableColHeader}>COMPLETED BY</Text>
                 <Text style={styles.tableCell}></Text>
-
                 <Text style={styles.tableColHeader}>DATE COMPLETE</Text>
+                <Text style={styles.tableCell}></Text>
+                <Text style={styles.tableColHeader}>NO OF PHOTOGRAPHS</Text>
                 <Text style={styles.tableCell}></Text>
             </View>
         </View>
