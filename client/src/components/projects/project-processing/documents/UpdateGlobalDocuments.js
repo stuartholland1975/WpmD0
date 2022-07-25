@@ -1,15 +1,15 @@
 import React from 'react';
-import {useParams} from "react-router-dom";
-import {PhotoCamera} from "@mui/icons-material";
-import {Box, Button, Dialog, DialogTitle, Divider, IconButton} from "@mui/material";
-import {useModal} from "react-modal-hook";
+import { useParams } from "react-router-dom";
+import { PhotoCamera } from "@mui/icons-material";
+import { Box, Button, Dialog, DialogTitle, Divider, IconButton } from "@mui/material";
+import { useModal } from "react-modal-hook";
 import CloseIcon from "@mui/icons-material/Close";
-import {gridSelectionsVar} from "../../../../cache";
+import { gridSelectionsVar } from "../../../../cache";
 import UpdateProjectGlobalDocuments from "../../../forms/documents/UpdateProjectGlobalDocuments";
 
-const UpdateGlobalDocuments = ({rowData}) => {
+const UpdateGlobalDocuments = ({ rowData }) => {
     const current = rowData.filter(obj => obj.global)
-    const {id} = useParams()
+    const { id } = useParams()
     const [showModal, hideModal] = useModal(() => {
         return (
             <Dialog
@@ -24,18 +24,18 @@ const UpdateGlobalDocuments = ({rowData}) => {
                         justifyContent='space-between'>
                         <Box
                             flexGrow={1}
-                            sx={{textTransform: 'uppercase', fontWeight: 'bold'}}>
+                            sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
                             UPDATE GLOBAL DOCUMENTS FOR PROJECT : {gridSelectionsVar().selectedOrder.projectTitle}
                         </Box>
                         <Box>
                             <IconButton onClick={hideModal}>
-                                <CloseIcon/>
+                                <CloseIcon />
                             </IconButton>
                         </Box>
                     </Box>
                 </DialogTitle>
-                <Divider/>
-                <UpdateProjectGlobalDocuments hideModal={hideModal} rowData={rowData} current={current} id={id}/>
+                <Divider />
+                <UpdateProjectGlobalDocuments hideModal={hideModal} rowData={rowData} current={current} id={id} />
             </Dialog>
         )
     }, [rowData, current, id])
@@ -43,9 +43,9 @@ const UpdateGlobalDocuments = ({rowData}) => {
     return (
         <Button
             onClick={showModal}
-            startIcon={<PhotoCamera/>}
+            startIcon={<PhotoCamera />}
             color='info'>
-            import global document
+            update global documents
         </Button>
     );
 };

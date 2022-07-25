@@ -262,7 +262,7 @@ export const GET_PROJECT_WORKBOOK_DETAILS = gql`
 
 export const GET_GLOBAL_DOCUMENTS = gql`
 	query GetGlobalDocuments {
-		documents(filter: { global: { equalTo: true } }) {
+		documents(condition: { global: true }) {
 			nodes {
 				id
 				title
@@ -270,6 +270,11 @@ export const GET_GLOBAL_DOCUMENTS = gql`
 				global
 				headerDocumentFile
 				orderheaderDocuments {
+					aggregates {
+						distinctCount {
+							orderheaderId
+						}
+					}
 					nodes {
 						orderheader {
 							id
