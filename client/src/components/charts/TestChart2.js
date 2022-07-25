@@ -42,14 +42,14 @@ const renderCustomizedLabel = ({
 export default function () {
 	return (
 		<ResponsiveContainer width={800} height={800}>
-			<PieChart width={800} height={800}>
+			<PieChart>
 				<Pie
 					data={data}
 					cx='50%'
 					cy='50%'
 					labelLine={false}
 					label={renderCustomizedLabel}
-					outerRadius={250}
+					//	outerRadius={250}
 					fill='#8884d8'
 					dataKey='value'
 				>

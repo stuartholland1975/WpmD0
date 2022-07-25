@@ -23,8 +23,7 @@ const GlobalDocumentsGrid = () => {
 				field: 'title',
 				checkboxSelection: (params) =>
 					params.data.orderheaderDocuments.aggregates.distinctCount
-						.orderheaderId == 0,
-				//checkboxSelection: true,
+						.orderheaderId === '0',
 			},
 			{
 				field: 'createdAt',

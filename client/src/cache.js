@@ -1,6 +1,6 @@
 /** @format */
 
-import {InMemoryCache, makeVar} from '@apollo/client';
+import { InMemoryCache, makeVar } from '@apollo/client';
 
 export const cache = new InMemoryCache({
 	typePolicies: {
@@ -31,6 +31,11 @@ export const cache = new InMemoryCache({
 						return toggleModal();
 					},
 				},
+				dashboardSelections: {
+					read() {
+						return dashboardSelectionsVar();
+					},
+				},
 			},
 		},
 	},
@@ -45,6 +50,12 @@ export const gridSelectionsInitialValue = {
 	selectedPeriod: false,
 	worksheetsValue: 0.0,
 };
+
+export const dashboardSelectionsInitialValue = {
+	selectedArea: false,
+};
+
+export const dashboardSelectionsVar = makeVar(dashboardSelectionsInitialValue);
 
 const mutationApiInitialValue = {
 	data: false,
