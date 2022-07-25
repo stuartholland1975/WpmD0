@@ -2,22 +2,12 @@
 
 import React from 'react';
 import {AgGridReact} from 'ag-grid-react';
-import {useQuery} from '@apollo/client';
-import {GET_PROJECT_DOCUMENTS} from '../../../api-calls/queries/misc';
 import {formatDate} from '../../../functions/formattingFunctions';
 import HyperLink from '../components/Hyperlink';
 import {useParams} from 'react-router-dom';
 
-const ProjectDocumentsGrid = () => {
+const ProjectDocumentsGrid = ({rowData}) => {
 	const {id} = useParams();
-	const [rowData, setRowData] = React.useState();
-
-	const {loading} = useQuery(GET_PROJECT_DOCUMENTS, {
-		variables: {orderId: Number(id)},
-		onCompleted: (data) =>
-			setRowData(data.orderheaderDocuments.nodes.map((item) => item.document)),
-	});
-
 	const columnDefs = React.useMemo(
 		() => [
 			{
@@ -27,6 +17,11 @@ const ProjectDocumentsGrid = () => {
 				field: 'createdAt',
 				filter: 'agDateColumnFilter',
 				valueFormatter: (params) => formatDate(params.value),
+			},
+			{
+				colId: 'documentType',
+				headerName: 'Document Type',
+				valueGetter: params => params.data.global ? "Global" : "Project"
 			},
 			{
 				colId: 'hyperLink',
@@ -47,7 +42,7 @@ const ProjectDocumentsGrid = () => {
 		}),
 		[],
 	);
-	if (loading) return null;
+	// if (loading) return null;
 
 	return (
 		<AgGridReact

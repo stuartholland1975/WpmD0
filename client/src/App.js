@@ -39,7 +39,7 @@ function App() {
                 },
                 {
                     element: <ComponentTests/>,
-                    path: 'testing/:id',
+                    path: 'testing',
                 },
             ],
         },

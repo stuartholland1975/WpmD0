@@ -14,7 +14,7 @@ export const GET_PROJECT_APPLICATION_DETAILS = gql`
                 thisApplicationValue
                 cumulativeApplicationValue
                 itemCount
-                locationCount
+                locationCount        
             }
         }
     }

@@ -1,7 +1,7 @@
 /** @format */
 
 import React from 'react';
-import ProjectWorkbook from '../components/projects/project-processing/workbooks/project-workbook/ProjectWorkbook';
+import TransferList from "../components/forms/components/TransferList";
 
 const ComponentTests = () => {
 	const componentRef = React.useRef();
@@ -11,7 +11,7 @@ const ComponentTests = () => {
 			<h1>COMPONENT TESTING</h1>
 
 			<hr/>
-			<ProjectWorkbook/>
+			<TransferList/>
 		</div>
 	);
 };
