@@ -14,12 +14,21 @@ import HelpIcon from '@mui/icons-material/Help';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import StarBorder from '@mui/icons-material/StarBorder';
-import {Box, CssBaseline, Divider, IconButton, List, ListItem, ListItemIcon, ListItemText,} from '@mui/material';
+import {
+	Box,
+	CssBaseline,
+	Divider,
+	IconButton,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+} from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import MuiDrawer from '@mui/material/Drawer';
-import {styled} from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
-import {Outlet, useNavigate} from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import LetterM from '../home/letter-m.png';
 import LetterP from '../home/letter-p.png';
 import LetterW from '../home/letter-w.png';
@@ -30,49 +39,49 @@ const drawerWidth = 220;
 const processingItems = [
 	{
 		text: 'HOME',
-		icon: <HomeIcon color='contrasting' fontSize='large'/>,
+		icon: <HomeIcon color='contrasting' fontSize='large' />,
 		path: '/',
 	},
 	{
 		text: 'PROJECTS',
-		icon: <ConstructionIcon color='contrasting' fontSize='large'/>,
+		icon: <ConstructionIcon color='contrasting' fontSize='large' />,
 		path: '/projects',
 	},
 	{
 		text: 'APPLICATIONS',
-		icon: <CurrencyPoundIcon color='contrasting' fontSize='large'/>,
+		icon: <CurrencyPoundIcon color='contrasting' fontSize='large' />,
 		path: '/',
 	},
 	{
 		text: 'TEST',
-		icon: <StarBorder color='contrasting' fontSize='large'/>,
+		icon: <StarBorder color='contrasting' fontSize='large' />,
 		path: '/testing',
 	},
 ];
 
 const adminItems = {
 	text: 'ADMIN',
-	icon: <AdminPanelSettingsIcon color='contrasting' fontSize='large'/>,
+	icon: <AdminPanelSettingsIcon color='contrasting' fontSize='large' />,
 	path: '/admin',
 	subMenu: [
 		{
 			text: 'PROJECTS',
-			icon: <AppsIcon color='contrasting' fontSize='medium'/>,
+			icon: <AppsIcon color='contrasting' fontSize='medium' />,
 			path: '/admin/projects',
 		},
 		{
 			text: 'PERIODS',
-			icon: <AppsIcon color='contrasting' fontSize='medium'/>,
+			icon: <AppsIcon color='contrasting' fontSize='medium' />,
 			path: '/',
 		},
 		{
 			text: 'APPLICATIONS',
-			icon: <AppsIcon color='contrasting' fontSize='medium'/>,
+			icon: <AppsIcon color='contrasting' fontSize='medium' />,
 			path: '/',
 		},
 		{
 			text: 'DOCUMENTS',
-			icon: <AppsIcon color='contrasting' fontSize='medium'/>,
+			icon: <AppsIcon color='contrasting' fontSize='medium' />,
 			path: '/admin/documents',
 		},
 	],
@@ -80,34 +89,34 @@ const adminItems = {
 const infoItems = [
 	{
 		text: 'DASHBOARD',
-		icon: <DashboardIcon color='contrasting' fontSize='large'/>,
-		path: '/',
+		icon: <DashboardIcon color='contrasting' fontSize='large' />,
+		path: '/dashboard',
 	},
 	{
 		text: 'REPORTS',
-		icon: <DocumentScannerIcon color='contrasting' fontSize='large'/>,
+		icon: <DocumentScannerIcon color='contrasting' fontSize='large' />,
 		path: '/',
 	},
 ];
 
 const enquiryItems = {
 	text: 'ENQUIRIES',
-	icon: <HelpIcon color='contrasting' fontSize='large'/>,
+	icon: <HelpIcon color='contrasting' fontSize='large' />,
 	path: '/',
 	subMenu: [
 		{
 			text: 'APPLICATIONS',
-			icon: <AppsIcon color='contrasting' fontSize='medium'/>,
+			icon: <AppsIcon color='contrasting' fontSize='medium' />,
 			path: '/',
 		},
 		{
 			text: 'FINANCIAL',
-			icon: <AppsIcon color='contrasting' fontSize='medium'/>,
+			icon: <AppsIcon color='contrasting' fontSize='medium' />,
 			path: '/',
 		},
 		{
 			text: 'PROJECTS',
-			icon: <AppsIcon color='contrasting' fontSize='medium'/>,
+			icon: <AppsIcon color='contrasting' fontSize='medium' />,
 			path: '/',
 		},
 	],
@@ -139,7 +148,7 @@ const closedMixin = (theme) => ({
 
 const DrawerHeader = styled('div', {
 	shouldForwardProp: (prop) => prop !== 'open',
-})(({theme, open}) => ({
+})(({ theme, open }) => ({
 	height: 50,
 	justifyContent: 'space-evenly',
 	display: 'flex',
@@ -153,7 +162,7 @@ const DrawerHeader = styled('div', {
 
 const Drawer = styled(MuiDrawer, {
 	shouldForwardProp: (prop) => prop !== 'open',
-})(({theme, open}) => ({
+})(({ theme, open }) => ({
 	width: drawerWidth,
 	flexShrink: 0,
 	whiteSpace: 'nowrap',
@@ -168,7 +177,7 @@ const Drawer = styled(MuiDrawer, {
 	}),
 }));
 
-const NavigationDrawer = ({children}) => {
+const NavigationDrawer = ({ children }) => {
 	const navigate = useNavigate();
 	const [open, setOpen] = React.useState(true);
 	const [adminOpen, setAdminOpen] = React.useState(false);
@@ -194,19 +203,20 @@ const NavigationDrawer = ({children}) => {
 
 	// noinspection SpellCheckingInspection
 	return (
-		<Box sx={{display: 'flex'}}>
-			<CssBaseline/>
+		<Box sx={{ display: 'flex' }}>
+			<CssBaseline />
 			<Drawer variant='permanent' open={open}>
 				<DrawerHeader open={open}>
 					{open && (
 						<IconButton
 							edge='end'
-							sx={{p: 2}}
+							sx={{ p: 2 }}
 							disableTouchRipple
-							onClick={() => navigate('/')}>
-							<img src={LetterW} height={40} alt={'W'}/>
-							<img src={LetterP} height={40} alt={'P'}/>
-							<img src={LetterM} height={40} alt={'M'}/>
+							onClick={() => navigate('/')}
+						>
+							<img src={LetterW} height={40} alt={'W'} />
+							<img src={LetterP} height={40} alt={'P'} />
+							<img src={LetterM} height={40} alt={'M'} />
 						</IconButton>
 					)}
 					{!open && (
@@ -214,49 +224,53 @@ const NavigationDrawer = ({children}) => {
 							color='inherit'
 							aria-label='open drawer'
 							onClick={handleDrawerOpen}
-							edge='start'>
-							<MenuIcon fontSize='large'/>
+							edge='start'
+						>
+							<MenuIcon fontSize='large' />
 						</IconButton>
 					)}
 					{open && (
 						<IconButton onClick={handleDrawerClose} disableTouchRipple>
-							<ChevronLeftIcon color='contrasting' fontSize='large'/>
+							<ChevronLeftIcon color='contrasting' fontSize='large' />
 						</IconButton>
 					)}
 				</DrawerHeader>
-				<Divider color='white'/>
+				<Divider color='white' />
 				<List>
 					{processingItems.map((item) => (
 						<ListItem
 							divider
 							button
 							key={item.text}
-							sx={{mt: 1, mb: 1}}
-							onClick={() => navigate(item.path)}>
+							sx={{ mt: 1, mb: 1 }}
+							onClick={() => navigate(item.path)}
+						>
 							<ListItemIcon>{item.icon}</ListItemIcon>
-							<ListItemText color='white' primary={item.text}/>
+							<ListItemText color='white' primary={item.text} />
 						</ListItem>
 					))}
-					<Divider color='white'/>
+					<Divider color='white' />
 					{infoItems.map((item) => (
 						<ListItem
 							button
 							divider
 							key={item.text}
-							sx={{mt: 1, mb: 1}}
-							onClick={() => navigate(item.path)}>
+							sx={{ mt: 1, mb: 1 }}
+							onClick={() => navigate(item.path)}
+						>
 							<ListItemIcon>{item.icon}</ListItemIcon>
-							<ListItemText primary={item.text}/>
+							<ListItemText primary={item.text} />
 						</ListItem>
 					))}
 					<ListItem
 						button
 						divider
-						sx={{mt: 1, mb: 1}}
-						onClick={handleEnquiriesClick}>
+						sx={{ mt: 1, mb: 1 }}
+						onClick={handleEnquiriesClick}
+					>
 						<ListItemIcon>{enquiryItems.icon}</ListItemIcon>
-						<ListItemText primary={enquiryItems.text}/>
-						{enquiriesOpen ? <ExpandLess/> : <ExpandMore/>}
+						<ListItemText primary={enquiryItems.text} />
+						{enquiriesOpen ? <ExpandLess /> : <ExpandMore />}
 					</ListItem>
 					<Collapse in={enquiriesOpen} timeout={'auto'} unmountOnExit>
 						<List component={'div'}>
@@ -268,9 +282,10 @@ const NavigationDrawer = ({children}) => {
 									divider
 									button
 									key={item.text}
-									onClick={() => navigate(item.path)}>
+									onClick={() => navigate(item.path)}
+								>
 									<ListItemIcon>{item.icon}</ListItemIcon>
-									<ListItemText primary={item.text}/>
+									<ListItemText primary={item.text} />
 								</ListItem>
 							))}
 						</List>
@@ -299,15 +314,16 @@ const NavigationDrawer = ({children}) => {
 							))}
 						</List>
 					</Collapse> */}
-					<Divider color='white'/>
+					<Divider color='white' />
 					<ListItem
 						divider
 						button
-						sx={{mt: 1, mb: 1}}
-						onClick={handleAdminClick}>
+						sx={{ mt: 1, mb: 1 }}
+						onClick={handleAdminClick}
+					>
 						<ListItemIcon>{adminItems.icon}</ListItemIcon>
-						<ListItemText primary={adminItems.text}/>
-						{adminOpen ? <ExpandLess/> : <ExpandMore/>}
+						<ListItemText primary={adminItems.text} />
+						{adminOpen ? <ExpandLess /> : <ExpandMore />}
 					</ListItem>
 					<Collapse in={adminOpen} timeout={'auto'} unmountOnExit={true}>
 						<List component={'div'}>
@@ -319,9 +335,10 @@ const NavigationDrawer = ({children}) => {
 									divider
 									button
 									key={item.text}
-									onClick={() => navigate(item.path)}>
+									onClick={() => navigate(item.path)}
+								>
 									<ListItemIcon>{item.icon}</ListItemIcon>
-									<ListItemText primary={item.text}/>
+									<ListItemText primary={item.text} />
 								</ListItem>
 							))}
 						</List>
@@ -338,9 +355,9 @@ const NavigationDrawer = ({children}) => {
 				</List>
 			</Drawer>
 			<Box component='main' width={'100%'}>
-				<PageTitle/>
+				<PageTitle />
 				<Box ml={2} mr={2}>
-					<Outlet/>
+					<Outlet />
 				</Box>
 			</Box>
 		</Box>
