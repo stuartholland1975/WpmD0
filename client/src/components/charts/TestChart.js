@@ -60,10 +60,9 @@ const data = [
 
 export default function Example() {
 	return (
-		<ResponsiveContainer width={800} height={800}>
+		<ResponsiveContainer width={800} height={'100%'}>
 			<BarChart
-				width={500}
-				height={300}
+
 				data={data}
 				margin={{
 					top: 5,

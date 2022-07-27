@@ -7,6 +7,9 @@ import { GET_GLOBAL_DOCUMENTS } from '../../../api-calls/queries/misc';
 import { formatDate } from '../../../functions/formattingFunctions';
 import HyperLink from '../components/Hyperlink';
 import { gridSelectionsVar } from '../../../cache';
+import {DefaultColDef} from "../components/defaultColDef";
+
+
 
 const GlobalDocumentsGrid = () => {
 	const [rowData, setRowData] = React.useState();
