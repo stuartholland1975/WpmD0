@@ -6,12 +6,9 @@ import { formatNumberNoDecimals } from '../../../functions/formattingFunctions';
 import { useQuery } from '@apollo/client';
 import { GET_AREAS_WITH_VALUES } from '../../../api-calls/queries/misc';
 
-const AreaValuesGrid = () => {
+const AreaValuesGrid = ({ rowData }) => {
 	const gridRef = React.useRef();
-	const [rowData, setRowData] = React.useState();
-	const { loading, error, refetch } = useQuery(GET_AREAS_WITH_VALUES, {
-		onCompleted: (data) => setRowData(data.areaWithValues.nodes),
-	});
+
 	const columnDefs = React.useMemo(
 		() => [
 			{
@@ -84,9 +81,6 @@ const AreaValuesGrid = () => {
 		gridRef.current.api.setPinnedBottomRowData(createPinnedRowData());
 	};
 
-	if (loading) return null;
-	if (error) console.log(error.message);
-
 	return (
 		<AgGridReact
 			className='ag-theme-alpine'
@@ -103,7 +97,7 @@ const AreaValuesGrid = () => {
 			onGridReady={onGridReady}
 			getRowStyle={(params) => {
 				if (params.node.rowPinned) {
-					return { 'font-weight': 'bold' };
+					return { fontWeight: 'bold' };
 				}
 			}}
 		/>

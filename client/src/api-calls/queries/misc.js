@@ -1,6 +1,6 @@
 /** @format */
 
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const GET_ALL_AREAS = gql`
 	query getAreas {
@@ -289,30 +289,30 @@ export const GET_GLOBAL_DOCUMENTS = gql`
 `;
 
 export const GET_ALL_PERIODS = gql`
-query GetAllPeriod {
-periods {
-nodes {
-id
-      week
-      weekCommencingDate
-      weekEndingDate
-      year
-      periodNumber
-}
-}
-}
-`
+	query GetAllPeriod {
+		periods {
+			nodes {
+				id
+				week
+				weekCommencingDate
+				weekEndingDate
+				year
+				periodNumber
+			}
+		}
+	}
+`;
 
 export const GET_AREAS_WITH_VALUES = gql`
-query GetAreasWithValues {
-  areaWithValues {
-    nodes {
-      id
-      description
-      orderCount
-      orderValue
-      valueComplete
-    }
-  }
-}
-`
+	query GetAreasWithValues {
+		areaWithValues(orderBy: ID_ASC) {
+			nodes {
+				id
+				description
+				orderCount
+				orderValue
+				valueComplete
+			}
+		}
+	}
+`;
