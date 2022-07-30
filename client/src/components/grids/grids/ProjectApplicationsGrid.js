@@ -1,17 +1,17 @@
 /** @format */
 
 import React from 'react';
-import {AgGridReact} from 'ag-grid-react';
-import {useQuery} from '@apollo/client';
-import {GET_PROJECT_APPLICATION_DETAILS} from '../../../api-calls/queries/applications';
-import {formatNumberGridNoDecimals} from '../../../functions/formattingFunctions';
-import {useParams} from 'react-router-dom';
+import { AgGridReact } from 'ag-grid-react';
+import { useQuery } from '@apollo/client';
+import { GET_PROJECT_APPLICATION_DETAILS } from '../../../api-calls/queries/applications';
+import { formatNumberGridNoDecimals } from '../../../functions/formattingFunctions';
+import { useParams } from 'react-router-dom';
 
 const ProjectApplicationsGrid = () => {
-	const {id} = useParams();
+	const { id } = useParams();
 	const [rowData, setRowData] = React.useState(null);
-	const {loading} = useQuery(GET_PROJECT_APPLICATION_DETAILS, {
-		variables: {orderId: Number(id)},
+	const { loading } = useQuery(GET_PROJECT_APPLICATION_DETAILS, {
+		variables: { orderId: Number(id) },
 		onCompleted: (data) =>
 			setRowData(data.applicationSummaryOrderheaderWithCumulativeValues.nodes),
 	});
@@ -35,7 +35,7 @@ const ProjectApplicationsGrid = () => {
 				valueFormatter: formatNumberGridNoDecimals,
 				type: 'numericColumn',
 				filter: 'agNumberColumnFilter',
-				cellStyle: {fontWeight: 'bold'},
+				cellStyle: { fontWeight: 'bold' },
 			},
 			{
 				field: 'cumulativeApplicationValue',
@@ -68,6 +68,13 @@ const ProjectApplicationsGrid = () => {
 		}),
 		[],
 	);
+	const rowClassRules = React.useMemo(() => {
+		return {
+			'application-current': (params) => {
+				return params.data.applicationCurrent;
+			},
+		};
+	}, []);
 	if (loading) return null;
 	return (
 		<AgGridReact
@@ -80,6 +87,7 @@ const ProjectApplicationsGrid = () => {
 			pagination={true}
 			paginationPageSize={20}
 			suppressRowClickSelection={true}
+			rowClassRules={rowClassRules}
 		/>
 	);
 };

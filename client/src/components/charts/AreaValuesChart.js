@@ -5,57 +5,55 @@ import * as agCharts from 'ag-charts-community';
 import { AgChartsReact } from 'ag-charts-react';
 
 const AreaValuesChart = ({ rowData }) => {
-	const [pieOptions, setOptions] = React.useState({
+	const barOptions = {
 		data: rowData.map((item) => ({
 			area: item.description,
-			orderValue: Number(item.orderValue),
-		})),
-		series: [
-			{
-				type: 'pie',
-				angleKey: 'orderValue',
-				labelKey: 'area',
-				title: {
-					text: 'Area Values Chart',
-					enabled: true,
-					fontSize: 20,
-					showInLegend: false,
-				},
-			},
-		],
-		theme: 'ag-pastel',
-	});
-	const [barOptions, setBarOptions] = React.useState({
-		data: rowData.map((item) => ({
-			area: item.description,
-			orderValue: Number(item.orderValue),
+			valueOs: Number(item.orderValue) - Number(item.valueComplete),
 			valueComplete: Number(item.valueComplete),
 		})),
 		title: {
-			text: "Apple's revenue by product category",
-		},
-		subtitle: {
-			text: 'in billion U.S. dollars',
+			text: "Order Values By Area",
 		},
 		series: [
 			{
 				type: 'column',
 				xKey: 'area',
 				yKey: 'valueComplete',
-				yName: 'valueComplete',
+				yName: 'Value Complete',
 				stacked: true,
 			},
 
 			{
 				type: 'column',
 				xKey: 'area',
-				yKey: 'orderValue',
-				yName: 'orderValue',
+				yKey: 'valueOs',
+				yName: 'Value Remaining',
 				stacked: true,
 			},
 		],
+		axes: [
+			{
+				type: 'category',
+				position: 'bottom',
+				title: {
+					text: 'Areas',
+					enabled: true,
+				},
+			},
+			{
+				type: 'number',
+				position: 'left',
+				title: {
+					text: 'Project Value (£)',
+					enabled: true,
+				},
+				label: {
+					format: 'n'
+				}
+			},
+		],
 		theme: 'ag-pastel',
-	});
+	}
 
 	return <AgChartsReact options={barOptions} />;
 	{

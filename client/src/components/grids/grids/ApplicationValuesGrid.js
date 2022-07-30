@@ -4,12 +4,12 @@ import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { formatNumberNoDecimals } from '../../../functions/formattingFunctions';
 
-const PeriodValuesGrid = ({ rowData }) => {
+const ApplicationValuesGrid = ({ rowData }) => {
 	const gridRef = React.useRef();
 	const columnDefs = React.useMemo(
 		() => [
 			{
-				field: 'period',
+				field: 'application',
 				sort: 'desc',
 			},
 			{
@@ -77,7 +77,7 @@ const PeriodValuesGrid = ({ rowData }) => {
 	const createPinnedRowData = () => {
 		return [
 			{
-				period: 'TOTALS',
+				application: 'TOTALS',
 				north: rowData
 					.map((item) => Number(item.north))
 					.reduce((tot, val) => tot + val),
@@ -127,4 +127,4 @@ const PeriodValuesGrid = ({ rowData }) => {
 	);
 };
 
-export default PeriodValuesGrid;
+export default ApplicationValuesGrid;

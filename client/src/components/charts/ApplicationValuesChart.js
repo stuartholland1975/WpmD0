@@ -3,20 +3,20 @@
 import React from 'react';
 import { AgChartsReact } from 'ag-charts-react';
 
-const WorkCompleteByPeriodArea = ({ rowData }) => {
+const ApplicationValuesChart = ({ rowData }) => {
 	const chartRef = React.useRef();
 
 	const barOptions = {
 		data: rowData,
 
 		title: {
-			text: 'Work Complete By Period',
+			text: 'Application Values',
 		},
 
 		series: [
 			{
 				type: 'column',
-				xKey: 'period',
+				xKey: 'application',
 				yKey: 'north',
 				yName: 'North',
 				stacked: true,
@@ -24,35 +24,35 @@ const WorkCompleteByPeriodArea = ({ rowData }) => {
 
 			{
 				type: 'column',
-				xKey: 'period',
+				xKey: 'application',
 				yKey: 'central',
 				yName: 'Central',
 				stacked: true,
 			},
 			{
 				type: 'column',
-				xKey: 'period',
+				xKey: 'application',
 				yKey: 'south',
 				yName: 'South',
 				stacked: true,
 			},
 			{
 				type: 'column',
-				xKey: 'period',
+				xKey: 'application',
 				yKey: 'admin',
 				yName: 'Admin',
 				stacked: true,
 			},
 			{
 				type: 'column',
-				xKey: 'period',
+				xKey: 'application',
 				yKey: 'misc',
 				yName: 'Misc',
 				stacked: true,
 			},
 			{
 				type: 'column',
-				xKey: 'period',
+				xKey: 'application',
 				yKey: 'test',
 				yName: 'Test',
 				stacked: true,
@@ -63,7 +63,7 @@ const WorkCompleteByPeriodArea = ({ rowData }) => {
 				type: 'category',
 				position: 'bottom',
 				title: {
-					text: 'Period',
+					text: 'Application',
 					enabled: true,
 				},
 			},
@@ -71,7 +71,7 @@ const WorkCompleteByPeriodArea = ({ rowData }) => {
 				type: 'number',
 				position: 'left',
 				title: {
-					text: 'Value Complete (£)',
+					text: 'Value Applied (£)',
 					enabled: true,
 				},
 				label: {
@@ -88,4 +88,4 @@ const WorkCompleteByPeriodArea = ({ rowData }) => {
 	return <AgChartsReact options={barOptions} ref={chartRef} />;
 };
 
-export default WorkCompleteByPeriodArea;
+export default ApplicationValuesChart;

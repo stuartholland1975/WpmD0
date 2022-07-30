@@ -7,7 +7,6 @@ import HyperLink from '../components/Hyperlink';
 import {useParams} from 'react-router-dom';
 
 const ProjectDocumentsGrid = ({rowData}) => {
-	const {id} = useParams();
 	const columnDefs = React.useMemo(
 		() => [
 			{
