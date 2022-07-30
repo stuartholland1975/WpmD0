@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="UnattendedHostPersistenceState">
+    <option name="openedFilesInfos">
+      <list>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="865" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/projects/project-processing/applications/ProjectApplications.js" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="2204" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/grids/grids/ProjectLocationsAvailableForApplicationGrid.js" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="790" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/api-calls/queries/applications.js" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="314" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/grids/grids/ProjectItemsAvailableForApplicationGrid.js" />
+        </OpenedFileInfo>
+      </list>
+    </option>
+  </component>
+</project>
