@@ -18,7 +18,11 @@ const ProjectLocationsAvailableForApplicationGrid = ({ setItemData }) => {
 		{
 			variables: { orderId: Number(id) },
 			onCompleted: (data) =>
-				setRowData(data.wpmGraphqlGetLocationsAvailableForApplication.nodes),
+				setRowData(data.wpmGraphqlGetLocationsAvailableForApplication.nodes.map(item => ({
+					...item,
+					itemsAvailable: data.wpmGraphqlGetItemsAvailableForApplication.nodes.filter(obj => obj.sitelocationId === item.id).length,
+					valueAvailable: item.valueComplete - item.valueApplied
+				}))),
 		},
 	);
 
@@ -33,13 +37,12 @@ const ProjectLocationsAvailableForApplicationGrid = ({ setItemData }) => {
 				field: 'reference',
 			},
 			{
-				field: 'itemsComplete',
-				headerName: 'items Available',
+				field: 'itemsAvailable',
 				type: 'numericColumn',
 			},
 			{
-				field: 'valueComplete',
-				headerName: 'Value Available',
+				field: 'valueAvailable',
+
 				valueFormatter: formatNumberGridTwoDecimals,
 				type: 'numericColumn',
 				filter: 'agNumberColumnFilter',
@@ -60,13 +63,27 @@ const ProjectLocationsAvailableForApplicationGrid = ({ setItemData }) => {
 
 	const onSelectionChanged = React.useCallback(() => {
 		const selectedRow = gridRef.current.api.getSelectedRows();
-
 		setItemData(
 			itemData.wpmGraphqlGetItemsAvailableForApplication.nodes.filter((f) =>
 				selectedRow.some((item) => item.id === f.sitelocationId),
 			),
 		);
 	}, []);
+
+	const createPinnedRowData = () => {
+		return [
+			{
+				worksheetReference: 'TOTALS',
+				valueAvailable: rowData
+					.map((item) => Number(item.valueAvailable))
+					.reduce((tot, val) => tot + val),
+			},
+		];
+	};
+
+	const onGridReady = (params) => {
+		params.api.setPinnedBottomRowData(createPinnedRowData());
+	}
 
 	if (loading) return null;
 	return (
@@ -83,6 +100,13 @@ const ProjectLocationsAvailableForApplicationGrid = ({ setItemData }) => {
 			rowSelection={'multiple'}
 			onSelectionChanged={onSelectionChanged}
 			ref={gridRef}
+			onGridReady={onGridReady}
+			pinnedBottomRowData={[]}
+			getRowStyle={(params) => {
+				if (params.node.rowPinned) {
+					return { fontWeight: 'bold' };
+				}
+			}}
 		/>
 	);
 };

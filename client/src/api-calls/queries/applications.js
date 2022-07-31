@@ -53,6 +53,7 @@ export const GET_PROJECT_ITEMS_AVAILABLE_FOR_APPLICATION = gql`
 				itemsComplete
 				valueComplete
 				orderheaderId
+				valueApplied
 			}
 		}
 	}
