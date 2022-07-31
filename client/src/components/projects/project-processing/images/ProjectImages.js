@@ -1,16 +1,16 @@
 /** @format */
 
-import {useQuery, useReactiveVar} from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import ImageGallery from 'react-image-gallery';
-import {GET_ORDER_IMAGES} from '../../../../api-calls/queries/misc';
-import {gridSelectionsVar} from '../../../../cache';
-import {formatDate} from '../../../../functions/formattingFunctions';
+import { useParams } from 'react-router-dom';
+import { GET_ORDER_IMAGES } from '../../../../api-calls/queries/misc';
+import { formatDate } from '../../../../functions/formattingFunctions';
 
 const ProjectImages = () => {
-	const selectedProject = useReactiveVar(gridSelectionsVar).selectedOrder;
+	const { id } = useParams();
 
-	const {data, loading} = useQuery(GET_ORDER_IMAGES, {
-		variables: {id: selectedProject.id},
+	const { data, loading } = useQuery(GET_ORDER_IMAGES, {
+		variables: { id: Number(id) },
 		fetchPolicy: 'cache-and-network',
 	});
 	const images = data?.imageDetails?.nodes.map((item) => ({
@@ -19,7 +19,7 @@ const ProjectImages = () => {
 
 		originalHeight: 800,
 		description: (
-			<div style={{textAlign: 'left'}}>
+			<div style={{ textAlign: 'left' }}>
 				<p>WORKSHEET: {item.worksheetReference}</p>
 				<p>{item.longName}</p>
 				{
@@ -38,19 +38,16 @@ const ProjectImages = () => {
 			'_blank',
 		);
 
-
 	if (loading) return null;
 	return (
-		<div style={{marginTop: '50px'}}>
-			{images.length > 0 ? (
+		<div style={{ marginTop: '50px' }}>
+			{images?.length > 0 ? (
 				<ImageGallery
-
 					items={images}
 					thumbnailPosition='bottom'
 					onClick={handleImageClick}
 					lazyLoad={true}
 					showThumbnails={true}
-
 				/>
 			) : (
 				<div className='no-data-message'>
