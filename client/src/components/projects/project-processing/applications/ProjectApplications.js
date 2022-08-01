@@ -7,8 +7,10 @@ import { Box, Button, Grid } from '@mui/material';
 import ProjectItemsAvailableForApplicationGrid from '../../../grids/grids/ProjectItemsAvailableForApplicationGrid';
 import ProjectWorksheetsAvailableForApplicationGrid from '../../../grids/grids/ProjectWorksheetsAvailableForApplicationGrid';
 import { useParams } from 'react-router-dom';
-import { useQuery, useReactiveVar } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { GET_PROJECT_ITEMS_AVAILABLE_FOR_APPLICATION } from '../../../../api-calls/queries/applications';
+import { ADD_ITEMS_TO_APPLICATION } from '../../../../api-calls/mutations/project-mutations';
+import { useConfirm } from 'react-confirm-alert';
 
 const styles = {
 	container: { display: 'flex' },
@@ -21,6 +23,7 @@ const styles = {
 
 const ProjectApplications = () => {
 	const { id } = useParams();
+	const confirm = useConfirm();
 	const [locationData, setLocationData] = React.useState([]);
 	const [itemData, setItemData] = React.useState([]);
 	const [worksheetData, setWorksheetData] = React.useState([]);
@@ -56,7 +59,40 @@ const ProjectApplications = () => {
 		},
 	});
 
+	const [updateApplication] = useMutation(ADD_ITEMS_TO_APPLICATION);
+
+	const handleSubmit = () => {
+		const apiData = worksheetData.map((item) => item.id);
+		const locationCount = [
+			...new Set(worksheetData.map((item) => item.sitelocationId)),
+		].length;
+		const itemCount = [
+			...new Set(worksheetData.map((item) => item.orderdetail.id)),
+		].length;
+
+		confirm({
+			title: 'Confirm Data Submission',
+			titleProps: { color: 'red', fontWeight: 'bold' },
+			content: `Submission Contains ${locationCount} locations(s) ${(
+				<br />
+			)} ${itemCount} item(s) With A Value of ${worksheetData
+				.map((item) =>
+					Number(item.valueComplete).reduce((tot, num) => tot + num),
+				)
+				.toLocaleString()}`,
+			confirmationText: 'Submit',
+			cancellationButtonProps: { color: 'secondary' },
+			allowClose: false,
+			contentProps: { fontWeight: 'bold' },
+		}).then(() =>
+			updateApplication({
+				variables: { input: apiData, orderId: Number(id) },
+			}),
+		);
+	};
+
 	if (loading) return null;
+
 	return (
 		<Box sx={styles.container}>
 			<Box sx={styles.columnContainer}>
@@ -75,9 +111,10 @@ const ProjectApplications = () => {
 					/>
 				</Box>
 				<Box p={2}>
-					<Button color={'submit'} disabled={worksheetData.length === 0}>uionuonui</Button>
+					<Button color='submit' disabled={worksheetData.length === 0}>
+						add items to application
+					</Button>
 				</Box>
-
 			</Box>
 			<Box sx={styles.columnContainer}>
 				<Box p={2}>

@@ -1,6 +1,6 @@
 /** @format */
 
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const CREATE_PROJECT_HEADER = gql`
 	mutation CreateProjectHeader($input: OrderheaderInput!) {
@@ -583,6 +583,54 @@ export const UPDATE_PROJECT_GLOBAL_DOCUMENTS = gql`
 		mnCreateOrderheaderDocument(input: { mnOrderheaderDocument: $additions }) {
 			orderheader {
 				orderheaderWithValueById {
+					worktypeId
+					orderStatusId
+					statusDescription
+					averageLocationValue
+					averageItemValue
+					notes
+					startDate
+					endDate
+					issuedDate
+					area
+					areaId
+					averageItemValue
+					averageLocationValue
+					id
+					itemCount
+					itemCountBoq
+					itemCountVarn
+					itemsComplete
+					itemsCompleteBoq
+					itemsCompleteVarn
+					locationCount
+					locationsComplete
+					statusDescription
+					orderNumber
+					orderValueLabour
+					orderValueMaterials
+					orderValueOther
+					orderValueTotal
+					orderValueTotalApplied
+					orderValueTotalBoq
+					orderValueTotalComplete
+					orderValueTotalVarn
+					projectTitle
+					workType
+					issuedDate
+					documentCount
+					imageCount
+				}
+			}
+		}
+	}
+`;
+
+export const ADD_ITEMS_TO_APPLICATION = gql`
+	mutation AddItemsToApplication($input: [Int!], $orderId: Int!) {
+		addWorksheetsToApplication(input: { worksheetId: $input }) {
+			query {
+				orderheaderWithValueById(id: $orderId) {
 					worktypeId
 					orderStatusId
 					statusDescription
