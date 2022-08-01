@@ -20,6 +20,7 @@ const ProjectApplicationsGrid = () => {
 		() => [
 			{
 				field: 'applicationNumber',
+				sort: 'desc',
 			},
 			{
 				field: 'applicationReference',

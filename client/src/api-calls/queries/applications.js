@@ -56,5 +56,21 @@ export const GET_PROJECT_ITEMS_AVAILABLE_FOR_APPLICATION = gql`
 				valueApplied
 			}
 		}
+		wpmGraphqlGetWorksheetsAvailableForApplication(
+			filter: { orderheaderId: { equalTo: $orderId } }
+		) {
+			nodes {
+				worksheetReference
+				itemNumber
+				activityCode
+				activityDescription
+				qtyComplete
+				valueComplete
+				dateComplete
+				supervisorName
+				id
+				orderdetailId
+			}
+		}
 	}
 `;

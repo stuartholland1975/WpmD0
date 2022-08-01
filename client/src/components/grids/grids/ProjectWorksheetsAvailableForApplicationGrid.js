@@ -2,15 +2,10 @@
 
 import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { gridSelectionsVar } from '../../../cache';
 import { usePrevious } from 'react-use';
 import { formatNumberGridTwoDecimals } from '../../../functions/formattingFunctions';
 
-const ProjectItemsAvailableForApplicationGrid = ({
-	rowData,
-	setWorksheetData,
-	allWorksheets,
-}) => {
+const ProjectWorksheetsAvailableForApplicationGrid = ({ rowData }) => {
 	const prevRowData = usePrevious(rowData);
 	const gridRef = React.useRef();
 	const columnDefs = React.useMemo(
@@ -31,10 +26,6 @@ const ProjectItemsAvailableForApplicationGrid = ({
 				field: 'activityDescription',
 			},
 			{
-				field: 'worksheetsAvaliable',
-				type: 'numericColumn',
-			},
-			{
 				field: 'qtyComplete',
 				valueFormatter: (params) =>
 					params.value ? formatNumberGridTwoDecimals(params) : null,
@@ -42,11 +33,16 @@ const ProjectItemsAvailableForApplicationGrid = ({
 				filter: 'agNumberColumnFilter',
 			},
 			{
-				field: 'unitPayableTotal',
+				headerName: 'Work Done Date',
+				field: 'dateComplete',
 				valueFormatter: (params) =>
-					params.value ? formatNumberGridTwoDecimals(params) : null,
-				type: 'numericColumn',
-				filter: 'agNumberColumnFilter',
+					params.value
+						? new Date(params.value).toLocaleDateString('en-GB')
+						: null,
+			},
+			{
+				headerName: 'Supervisor Name',
+				field: 'supervisorName',
 			},
 			{
 				field: 'valueComplete',
@@ -68,15 +64,6 @@ const ProjectItemsAvailableForApplicationGrid = ({
 		}),
 		[],
 	);
-
-	const onSelectionChanged = React.useCallback(() => {
-		const selectedRow = gridRef.current.api.getSelectedRows();
-		setWorksheetData(
-			allWorksheets.filter((f) =>
-				selectedRow.some((item) => item.id === f.orderdetailId),
-			),
-		);
-	}, []);
 
 	React.useEffect(() => {
 		if (gridRef.current.api) {
@@ -110,7 +97,6 @@ const ProjectItemsAvailableForApplicationGrid = ({
 			},
 		];
 	};
-
 	return (
 		<div style={{ height: '40vh' }}>
 			<AgGridReact
@@ -123,12 +109,11 @@ const ProjectItemsAvailableForApplicationGrid = ({
 				//	domLayout='autoHeight'
 				suppressRowClickSelection={true}
 				rowSelection={'multiple'}
-				onSelectionChanged={onSelectionChanged}
 				ref={gridRef}
 				overlayNoRowsTemplate={
 					'<span style="padding: 10px; border: 2px solid #444; font-size: 20px; font-weight: bold; background: #fff">No Location Selected</span>'
 				}
-				pinnedBottomRowData={[]}
+				pinnedBottomRowData={[{}]}
 				getRowStyle={(params) => {
 					if (params.node.rowPinned) {
 						return { fontWeight: 'bold' };
@@ -139,4 +124,4 @@ const ProjectItemsAvailableForApplicationGrid = ({
 	);
 };
 
-export default ProjectItemsAvailableForApplicationGrid;
+export default ProjectWorksheetsAvailableForApplicationGrid;

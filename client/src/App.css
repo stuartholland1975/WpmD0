@@ -104,3 +104,11 @@
 	color: crimson !important;
 	font-weight: bolder;
 }
+
+.multi-grid-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column wrap;
+	align-content: center;
+}
