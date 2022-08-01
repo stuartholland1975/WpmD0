@@ -12,12 +12,6 @@ import { GET_PROJECT_ITEMS_AVAILABLE_FOR_APPLICATION } from '../../../../api-cal
 
 const styles = {
 	container: { display: 'flex' },
-	rowContainer: {
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		flexGrow: 1,
-	},
 	columnContainer: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -50,7 +44,7 @@ const ProjectApplications = () => {
 			setAllItems(
 				data.wpmGraphqlGetItemsAvailableForApplication.nodes.map((item) => ({
 					...item,
-					worksheetsAvaliable:
+					worksheetsAvailable:
 						data.wpmGraphqlGetWorksheetsAvailableForApplication.nodes.filter(
 							(obj) => obj.orderdetailId === item.id,
 						).length,
@@ -80,6 +74,10 @@ const ProjectApplications = () => {
 						allItems={allItems}
 					/>
 				</Box>
+				<Box p={2}>
+					<Button color={'submit'} disabled={worksheetData.length === 0}>uionuonui</Button>
+				</Box>
+
 			</Box>
 			<Box sx={styles.columnContainer}>
 				<Box p={2}>

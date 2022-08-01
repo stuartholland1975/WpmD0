@@ -86,7 +86,7 @@ const ProjectApplicationsGrid = () => {
 			rowData={rowData}
 			domLayout='autoHeight'
 			pagination={true}
-			paginationPageSize={20}
+			paginationPageSize={5}
 			suppressRowClickSelection={true}
 			rowClassRules={rowClassRules}
 		/>

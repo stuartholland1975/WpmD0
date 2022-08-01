@@ -31,7 +31,7 @@ const ProjectItemsAvailableForApplicationGrid = ({
 				field: 'activityDescription',
 			},
 			{
-				field: 'worksheetsAvaliable',
+				field: 'worksheetsAvailable',
 				type: 'numericColumn',
 			},
 			{
@@ -103,7 +103,6 @@ const ProjectItemsAvailableForApplicationGrid = ({
 		return [
 			{
 				worksheetReference: 'TOTALS',
-
 				valueComplete: rowData
 					.map((item) => Number(item.valueComplete))
 					.reduce((tot, val) => tot + val),

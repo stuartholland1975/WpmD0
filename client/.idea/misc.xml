@@ -4,20 +4,16 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="2167" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/grids/grids/ProjectLocationsAvailableForApplicationGrid.js" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="1495" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/projects/project-processing/applications/ProjectApplications.js" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="1223" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/src/api-calls/queries/applications.js" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="3009" />
+          <option name="caretOffset" value="2569" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/grids/grids/ProjectItemsAvailableForApplicationGrid.js" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="2226" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/grids/grids/ProjectApplicationsGrid.js" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="1992" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/projects/project-processing/applications/ProjectApplications.js" />
         </OpenedFileInfo>
       </list>
     </option>
