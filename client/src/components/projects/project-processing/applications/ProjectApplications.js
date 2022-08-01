@@ -8,9 +8,12 @@ import ProjectItemsAvailableForApplicationGrid from '../../../grids/grids/Projec
 import ProjectWorksheetsAvailableForApplicationGrid from '../../../grids/grids/ProjectWorksheetsAvailableForApplicationGrid';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_PROJECT_ITEMS_AVAILABLE_FOR_APPLICATION } from '../../../../api-calls/queries/applications';
+import {
+	GET_PROJECT_ITEMS_AVAILABLE_FOR_APPLICATION,
+	GET_PROJECT_APPLICATION_DETAILS,
+} from '../../../../api-calls/queries/applications';
 import { ADD_ITEMS_TO_APPLICATION } from '../../../../api-calls/mutations/project-mutations';
-import { useConfirm } from 'react-confirm-alert';
+import { useConfirm } from 'material-ui-confirm';
 
 const styles = {
 	container: { display: 'flex' },
@@ -29,37 +32,50 @@ const ProjectApplications = () => {
 	const [worksheetData, setWorksheetData] = React.useState([]);
 	const [allItems, setAllItems] = React.useState([]);
 	const [allWorksheets, setAllWorksheets] = React.useState([]);
-	const { loading } = useQuery(GET_PROJECT_ITEMS_AVAILABLE_FOR_APPLICATION, {
-		variables: { orderId: Number(id) },
-		onCompleted: (data) => {
-			setLocationData(
-				data.wpmGraphqlGetLocationsAvailableForApplication.nodes.map(
-					(item) => ({
+	const { loading, refetch } = useQuery(
+		GET_PROJECT_ITEMS_AVAILABLE_FOR_APPLICATION,
+		{
+			variables: { orderId: Number(id) },
+			fetchPolicy: 'cache-and-network',
+			onCompleted: (data) => {
+				setLocationData(
+					data.wpmGraphqlGetLocationsAvailableForApplication.nodes.map(
+						(item) => ({
+							...item,
+							itemsAvailable:
+								data.wpmGraphqlGetItemsAvailableForApplication.nodes.filter(
+									(obj) => obj.sitelocationId === item.id,
+								).length,
+							valueAvailable: item.valueComplete - item.valueApplied,
+						}),
+					),
+				);
+				setAllItems(
+					data.wpmGraphqlGetItemsAvailableForApplication.nodes.map((item) => ({
 						...item,
-						itemsAvailable:
-							data.wpmGraphqlGetItemsAvailableForApplication.nodes.filter(
-								(obj) => obj.sitelocationId === item.id,
+						worksheetsAvailable:
+							data.wpmGraphqlGetWorksheetsAvailableForApplication.nodes.filter(
+								(obj) => obj.orderdetailId === item.id,
 							).length,
-						valueAvailable: item.valueComplete - item.valueApplied,
-					}),
-				),
-			);
-			setAllItems(
-				data.wpmGraphqlGetItemsAvailableForApplication.nodes.map((item) => ({
-					...item,
-					worksheetsAvailable:
-						data.wpmGraphqlGetWorksheetsAvailableForApplication.nodes.filter(
-							(obj) => obj.orderdetailId === item.id,
-						).length,
-				})),
-			);
-			setAllWorksheets(
-				data.wpmGraphqlGetWorksheetsAvailableForApplication.nodes,
-			);
+					})),
+				);
+				setAllWorksheets(
+					data.wpmGraphqlGetWorksheetsAvailableForApplication.nodes,
+				);
+			},
 		},
-	});
+	);
 
-	const [updateApplication] = useMutation(ADD_ITEMS_TO_APPLICATION);
+	const [updateApplication] = useMutation(ADD_ITEMS_TO_APPLICATION, {
+		refetchQueries: [
+			{
+				query: GET_PROJECT_APPLICATION_DETAILS,
+				variables: { orderId: Number(id) },
+			},
+		],
+		awaitRefetchQueries: true,
+		onCompleted: () => refetch(),
+	});
 
 	const handleSubmit = () => {
 		const apiData = worksheetData.map((item) => item.id);
@@ -67,28 +83,30 @@ const ProjectApplications = () => {
 			...new Set(worksheetData.map((item) => item.sitelocationId)),
 		].length;
 		const itemCount = [
-			...new Set(worksheetData.map((item) => item.orderdetail.id)),
+			...new Set(worksheetData.map((item) => item.orderdetailId)),
 		].length;
-
 		confirm({
 			title: 'Confirm Data Submission',
 			titleProps: { color: 'red', fontWeight: 'bold' },
-			content: `Submission Contains ${locationCount} locations(s) ${(
-				<br />
-			)} ${itemCount} item(s) With A Value of ${worksheetData
-				.map((item) =>
-					Number(item.valueComplete).reduce((tot, num) => tot + num),
-				)
+			content: `Submission Contains ${locationCount} locations(s)
+				 ${itemCount} item(s) With A Value of ${worksheetData
+				.map((item) => Number(item.valueComplete))
+				.reduce((tot, num) => tot + num)
 				.toLocaleString()}`,
 			confirmationText: 'Submit',
 			cancellationButtonProps: { color: 'secondary' },
 			allowClose: false,
 			contentProps: { fontWeight: 'bold' },
-		}).then(() =>
-			updateApplication({
-				variables: { input: apiData, orderId: Number(id) },
-			}),
-		);
+		})
+			.then(() =>
+				updateApplication({
+					variables: { input: apiData, orderId: Number(id) },
+				}),
+			)
+			.then(() => {
+				setItemData([]);
+				setWorksheetData([]);
+			});
 	};
 
 	if (loading) return null;
@@ -111,7 +129,11 @@ const ProjectApplications = () => {
 					/>
 				</Box>
 				<Box p={2}>
-					<Button color='submit' disabled={worksheetData.length === 0}>
+					<Button
+						color='submit'
+						disabled={worksheetData.length === 0}
+						onClick={handleSubmit}
+					>
 						add items to application
 					</Button>
 				</Box>
