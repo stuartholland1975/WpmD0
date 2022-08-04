@@ -2,12 +2,14 @@
 
 import ProjectHeaders from '../../projects/ProjectHeaders';
 import ProjectAdminButtons from './ProjectAdminButtons';
+import { Outlet } from 'react-router-dom';
 
 const ProjectAdmin = () => {
 	return (
 		<div>
-			<ProjectAdminButtons/>
-			<ProjectHeaders/>
+			<ProjectAdminButtons />
+			<ProjectHeaders />
+			<Outlet />
 		</div>
 	);
 };

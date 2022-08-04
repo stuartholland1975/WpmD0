@@ -85,6 +85,7 @@ const CreateProjectHeaderForm = (props) => {
 		control,
 		register,
 		reset,
+		setFocus,
 		formState: {errors},
 	} = useForm({
 		mode: 'onSubmit',
@@ -113,6 +114,8 @@ const CreateProjectHeaderForm = (props) => {
 			getOrderheaderStatuses();
 		}
 	}, [getOrderheaderStatuses, orderStatusOpen, orderStatusOptions.length]);
+
+	React.useEffect(() => setFocus('orderNumber'), [setFocus]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>

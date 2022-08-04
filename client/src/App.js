@@ -10,6 +10,7 @@ import ProjectHeaders from './components/projects/ProjectHeaders';
 import ComponentTests from './test-components/ComponentTests';
 import DocumentAdmin from './components/admin/documents/DocumentAdmin';
 import Dashboard from './components/dashboard/Dashboard';
+import AdminRoutes from './components/admin/AdminRoutes';
 
 function App() {
 	let element = useRoutes([
@@ -27,12 +28,8 @@ function App() {
 					exact: true,
 				},
 				{
-					element: <ProjectAdmin />,
-					path: 'admin/projects',
-				},
-				{
-					element: <DocumentAdmin />,
-					path: 'admin/documents',
+					element: <AdminRoutes />,
+					path: 'admin/*',
 				},
 				{
 					element: <ProjectProcessingRoutes />,

@@ -316,3 +316,16 @@ export const GET_AREAS_WITH_VALUES = gql`
 		}
 	}
 `;
+
+export const VALIDATE_IMPORT_DATA = gql`
+	query ValidateImportData(
+		$orderId: Int!
+		$activities: [String!]
+		$items: [Int!]
+		$refs: [String]
+	) {
+		validateActivities(activities: $activities)
+		validateItems(items: $items, orderId: $orderId)
+		validateReferences(orderId: $orderId, refs: $refs)
+	}
+`;

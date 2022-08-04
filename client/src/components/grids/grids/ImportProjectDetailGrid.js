@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
+import {CircularProgress} from "@mui/material";
 
 const ImportProjectDetailGrid = ({ importData }) => {
 	const columnDefs = React.useMemo(() => [
@@ -53,6 +54,7 @@ const ImportProjectDetailGrid = ({ importData }) => {
 	);
 
 	if (!importData) return null;
+
 	return (
 		<AgGridReact
 			className='ag-theme-alpine'
