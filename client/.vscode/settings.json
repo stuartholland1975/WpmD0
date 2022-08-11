@@ -1,0 +1,14 @@
+{
+	"sqltools.connections": [
+		{
+			"previewLimit": 50,
+			"server": "wpm-do.servehttp.com",
+			"port": 9432,
+			"driver": "PostgreSQL",
+			"name": "wpm-do",
+			"database": "wpm_dev",
+			"username": "postgres",
+			"password": "987jmo00"
+		}
+	]
+}

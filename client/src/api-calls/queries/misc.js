@@ -329,3 +329,9 @@ export const VALIDATE_IMPORT_DATA = gql`
 		validateReferences(orderId: $orderId, refs: $refs)
 	}
 `;
+
+export const VALIDATE_PRICES = gql`
+	query ValidatePrices($rateset: Int!, $activities: [String!]) {
+		validatePrices(activities: $activities, rateset: $rateset)
+	}
+`;

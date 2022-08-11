@@ -4,31 +4,7 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="182" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/grids/grids/ImportProjectDetailGrid.js" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="4898" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/src/api-calls/queries/misc.js" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="264" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/admin/projects/ProjectAdmin.js" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="0" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/admin/projects/ProjectAdminButtons.js" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="496" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/projects/ProjectHeaders.js" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="3636" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/grids/grids/ProjectHeaderGrid.js" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="1418" />
+          <option name="caretOffset" value="2290" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/src/components/admin/projects/ImportProjectDetails.js" />
         </OpenedFileInfo>
       </list>
